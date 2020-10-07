@@ -33,7 +33,7 @@ int main()
   std::vector<InstructionLine> instructionList;
   int PC = -4;
 
-  bool prevLabel = false;
+  bool nullLine = false;
 
   try
   {
@@ -43,17 +43,14 @@ int main()
       {
         continue;
       }
-
-      if (prevLabel != true)
-      {
-        PC += 4;
-      }
+      PC += 4;
       std::vector<Token> tokenLine = scan(line);
 
       Parser parser{tokenLine, symbolTable, PC};
-      parser.getContainsLabel() ? prevLabel = true : prevLabel = false;
+
       if (parser.getSkip() == true)
       {
+        PC -= 4;
         continue;
       }
 

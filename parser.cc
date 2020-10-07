@@ -8,9 +8,7 @@ Parser::Parser(std::vector<Token> tokenLine, SymbolTable &symbolTable, int PC)
         if (tokenLine[0].getKind() == Token::Kind::LABEL)
         {
             int count = 1;
-            contains_label = true;
             symbolTable.add(tokenLine[0].getLexeme(), PC);
-
             for (int i = count; i < tokenLine.size(); i++)
             {
                 if (tokenLine[i].getKind() == Token::Kind::LABEL)
@@ -76,11 +74,6 @@ int Parser::getInstructionStart()
 bool Parser::getSkip()
 {
     return skip;
-}
-
-bool Parser::getContainsLabel()
-{
-    return contains_label;
 }
 
 ParsingFailure::ParsingFailure(std::string message)
