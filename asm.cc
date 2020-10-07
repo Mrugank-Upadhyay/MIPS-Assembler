@@ -7,6 +7,7 @@
 #include "symbolTable.h"
 #include "instructions.h"
 #include "instructionLine.h"
+#include "encodeLabel.h"
 
 template <typename T>
 std::vector<T> slice(std::vector<T> v, int start, int end)
@@ -46,6 +47,15 @@ int main()
       PC += 4;
       std::vector<Token> tokenLine = scan(line);
 
+      //For reviewing Token Output
+
+      // for (auto token : tokenLine)
+      // {
+      //   std::cout << token;
+      // }
+
+      // std::cout << std::endl;
+
       Parser parser{tokenLine, symbolTable, PC};
 
       if (parser.getSkip() == true)
@@ -75,15 +85,28 @@ int main()
     return 1;
   }
 
+  std::vector<InstructionLine> instructionListEncoded;
+
+  try
+  {
+    EncodeLabel encodeLabel{instructionList, symbolTable};
+    instructionListEncoded = encodeLabel.getEncodedList();
+  }
+  catch (const SymbolTableFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
   int len = instructionList.size();
 
   try
   {
-    for (int i = 0; i < len; i++)
+    for (auto encodedLine : instructionListEncoded)
     {
-      Instructions instruction{slice(instructionList[i].getTokenLine(),
-                                     instructionList[i].getInstructionStart(), instructionList[i].getTokenLine().size() - 1),
-                               instructionList[i].getPC()};
+      Instructions instruction{slice(encodedLine.getTokenLine(),
+                                     encodedLine.getInstructionStart(), encodedLine.getTokenLine().size() - 1),
+                               encodedLine.getPC()};
       unsigned char c = instruction.getInstruction() >> 24;
       std::cout << c;
       c = instruction.getInstruction() >> 16;
@@ -94,13 +117,62 @@ int main()
       std::cout << c;
     }
   }
+
   catch (const WordFailure &f)
   {
     std::cerr << f.what() << std::endl;
     return 1;
   }
 
-  symbolTable.print();
+  catch (const ADDFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const SUBFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const SLTFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const SLTUFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const JRFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const JALRFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const BEQFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const BNEFailure &f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  // symbolTable.print();
 
   return 0;
 }
