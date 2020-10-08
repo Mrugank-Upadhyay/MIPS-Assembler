@@ -1,28 +1,28 @@
-#ifndef _ADD_
-#define _ADD_
+#ifndef _LIS_
+#define _LIS_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class ADD
+class LIS
 {
     int Instruction;
 
 public:
-    ADD(std::vector<Token> tokenLine);
+    LIS(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class ADDFailure
+class LISFailure
 {
     std::string message;
 
 public:
-    ADDFailure(std::string message);
+    LISFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _ADD_ */
+#endif /* _LIS_ */

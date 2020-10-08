@@ -1,28 +1,28 @@
-#ifndef _SLTU_
-#define _SLTU_
+#ifndef _SLT_
+#define _SLT_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class SLTU
+class SLT
 {
     int Instruction;
 
 public:
-    SLTU(std::vector<Token> tokenLine);
+    SLT(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class SLTUFailure
+class SLTFailure
 {
     std::string message;
 
 public:
-    SLTUFailure(std::string message);
+    SLTFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _SLTU_ */
+#endif /* _SLT_ */

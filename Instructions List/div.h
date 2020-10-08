@@ -1,28 +1,28 @@
-#ifndef _LIS_
-#define _LIS_
+#ifndef _DIV_
+#define _DIV_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class LIS
+class DIV
 {
     int Instruction;
 
 public:
-    LIS(std::vector<Token> tokenLine);
+    DIV(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class LISFailure
+class DIVFailure
 {
     std::string message;
 
 public:
-    LISFailure(std::string message);
+    DIVFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _LIS_ */
+#endif /* _DIV_ */

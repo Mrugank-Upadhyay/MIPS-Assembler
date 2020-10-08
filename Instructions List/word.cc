@@ -9,7 +9,6 @@ Word::Word(std::vector<Token> tokenLine)
     {
         if (tokenLine.back().getKind() == Token::Kind::HEXINT)
         {
-            std::stringstream ss;
             std::string max = "ffffffff";
             std::string hexint = tokenLine.back().getLexeme().substr(2);
             if (hexint.length() > max.length())

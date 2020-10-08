@@ -1,28 +1,28 @@
-#ifndef _DIVU_
-#define _DIVU_
+#ifndef _MFLO_
+#define _MFLO_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class DIVU
+class MFLO
 {
     int Instruction;
 
 public:
-    DIVU(std::vector<Token> tokenLine);
+    MFLO(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class DIVUFailure
+class MFLOFailure
 {
     std::string message;
 
 public:
-    DIVUFailure(std::string message);
+    MFLOFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _DIVU_ */
+#endif /* _MFLO_ */

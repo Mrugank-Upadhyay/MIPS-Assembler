@@ -1,28 +1,28 @@
-#ifndef _DIV_
-#define _DIV_
+#ifndef _JR_
+#define _JR_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class DIV
+class JR
 {
     int Instruction;
 
 public:
-    DIV(std::vector<Token> tokenLine);
+    JR(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class DIVFailure
+class JRFailure
 {
     std::string message;
 
 public:
-    DIVFailure(std::string message);
+    JRFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _DIV_ */
+#endif /* _JR_ */

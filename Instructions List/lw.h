@@ -1,28 +1,29 @@
-#ifndef _MULTU_
-#define _MULTU_
+#ifndef _LW_
+#define _LW_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include <cmath>
+#include "../scanner.h"
 
-class MULTU
+class LW
 {
     int Instruction;
 
 public:
-    MULTU(std::vector<Token> tokenLine);
+    LW(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class MULTUFailure
+class LWFailure
 {
     std::string message;
 
 public:
-    MULTUFailure(std::string message);
+    LWFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _MULTU_ */
+#endif /* _LW_ */

@@ -1,28 +1,28 @@
-#ifndef _MULT_
-#define _MULT_
+#ifndef _MFHI_
+#define _MFHI_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class MULT
+class MFHI
 {
     int Instruction;
 
 public:
-    MULT(std::vector<Token> tokenLine);
+    MFHI(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class MULTFailure
+class MFHIFailure
 {
     std::string message;
 
 public:
-    MULTFailure(std::string message);
+    MFHIFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _MULT_ */
+#endif /* _MFHI_ */

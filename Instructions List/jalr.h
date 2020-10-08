@@ -1,28 +1,28 @@
-#ifndef _JR_
-#define _JR_
+#ifndef _JALR_
+#define _JALR_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class JR
+class JALR
 {
     int Instruction;
 
 public:
-    JR(std::vector<Token> tokenLine);
+    JALR(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class JRFailure
+class JALRFailure
 {
     std::string message;
 
 public:
-    JRFailure(std::string message);
+    JALRFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _JR_ */
+#endif /* _JALR_ */

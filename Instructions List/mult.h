@@ -1,28 +1,28 @@
-#ifndef _JALR_
-#define _JALR_
+#ifndef _MULT_
+#define _MULT_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
-class JALR
+class MULT
 {
     int Instruction;
 
 public:
-    JALR(std::vector<Token> tokenLine);
+    MULT(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class JALRFailure
+class MULTFailure
 {
     std::string message;
 
 public:
-    JALRFailure(std::string message);
+    MULTFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _JALR_ */
+#endif /* _MULT_ */

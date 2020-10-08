@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include "../scanner.h"
 
 class SUB
 {

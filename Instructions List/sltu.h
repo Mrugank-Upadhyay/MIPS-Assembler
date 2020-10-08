@@ -1,30 +1,28 @@
-#ifndef _LW_
-#define _LW_
+#ifndef _SLTU_
+#define _SLTU_
 
 #include <vector>
 #include <string>
-#include <cmath>
-#include "scanner.h"
-#include "symbolTable.h"
+#include "../scanner.h"
 
-class LW
+class SLTU
 {
     int Instruction;
 
 public:
-    LW(std::vector<Token> tokenLine);
+    SLTU(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class LWFailure
+class SLTUFailure
 {
     std::string message;
 
 public:
-    LWFailure(std::string message);
+    SLTUFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _LW_ */
+#endif /* _SLTU_ */

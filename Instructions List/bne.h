@@ -1,30 +1,30 @@
-#ifndef _BEQ_
-#define _BEQ_
+#ifndef _BNE_
+#define _BNE_
 
 #include <vector>
 #include <string>
 #include <cmath>
-#include "scanner.h"
-#include "symbolTable.h"
+#include "../scanner.h"
+#include "../symbolTable.h"
 
-class BEQ
+class BNE
 {
     int Instruction;
 
 public:
-    BEQ(std::vector<Token> tokenLine, int PC, SymbolTable table);
+    BNE(std::vector<Token> tokenLine, int PC, SymbolTable table);
     int getInstruction();
 };
 
-class BEQFailure
+class BNEFailure
 {
     std::string message;
 
 public:
-    BEQFailure(std::string message);
+    BNEFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _BEQ_ */
+#endif /* _BNE_ */

@@ -1,30 +1,28 @@
-#ifndef _SW_
-#define _SW_
+#ifndef _MULTU_
+#define _MULTU_
 
 #include <vector>
 #include <string>
-#include <cmath>
-#include "scanner.h"
-#include "symbolTable.h"
+#include "../scanner.h"
 
-class SW
+class MULTU
 {
     int Instruction;
 
 public:
-    SW(std::vector<Token> tokenLine);
+    MULTU(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class SWFailure
+class MULTUFailure
 {
     std::string message;
 
 public:
-    SWFailure(std::string message);
+    MULTUFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _SW_ */
+#endif /* _MULTU_ */

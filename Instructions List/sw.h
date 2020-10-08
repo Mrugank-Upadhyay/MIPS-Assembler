@@ -1,28 +1,29 @@
-#ifndef _SLT_
-#define _SLT_
+#ifndef _SW_
+#define _SW_
 
 #include <vector>
 #include <string>
-#include "scanner.h"
+#include <cmath>
+#include "../scanner.h"
 
-class SLT
+class SW
 {
     int Instruction;
 
 public:
-    SLT(std::vector<Token> tokenLine);
+    SW(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class SLTFailure
+class SWFailure
 {
     std::string message;
 
 public:
-    SLTFailure(std::string message);
+    SWFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _SLT_ */
+#endif /* _SW_ */
