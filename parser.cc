@@ -54,82 +54,68 @@ void Parser::ParsingRules(std::vector<Token> tokenLine, int count)
     switch (tokenLine[count].getKind())
     {
     case Token::Kind::WORD:
-        if ((tokenLine.back().getKind() != Token::Kind::INT && tokenLine.back().getKind() != Token::Kind::HEXINT && tokenLine.back().getKind() != Token::Kind::ID) || (count + 2) != int(tokenLine.size()))
+        if ((count + 2) != int(tokenLine.size()) || (tokenLine.back().getKind() != Token::Kind::INT && tokenLine.back().getKind() != Token::Kind::HEXINT &&
+                                                     tokenLine.back().getKind() != Token::Kind::ID))
         {
             throw ParsingFailure("ERROR: invalid instruction / instruction format!");
         }
         break;
 
     case Token::Kind::ID:
-        if (tokenLine[count].getLexeme() == "add")
+        if (tokenLine[count].getLexeme() == "add" || tokenLine[count].getLexeme() == "sub" ||
+            tokenLine[count].getLexeme() == "slt" || tokenLine[count].getLexeme() == "sltu")
         {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 3].getKind() != Token::Kind::REG ||
-                tokenLine[count + 5].getKind() != Token::Kind::REG || (count + 6) != int(tokenLine.size()))
+            if ((count + 6) != int(tokenLine.size()) || tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 2].getKind() != Token::Kind::COMMA ||
+                tokenLine[count + 3].getKind() != Token::Kind::REG || tokenLine[count + 4].getKind() != Token::Kind::COMMA ||
+                tokenLine[count + 5].getKind() != Token::Kind::REG)
             {
                 throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
             }
         }
 
-        else if (tokenLine[count].getLexeme() == "sub")
+        else if (tokenLine[count].getLexeme() == "jr" || tokenLine[count].getLexeme() == "jalr")
         {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 3].getKind() != Token::Kind::REG ||
-                tokenLine[count + 5].getKind() != Token::Kind::REG || (count + 6) != int(tokenLine.size()))
+            if ((count + 2) != int(tokenLine.size()) || tokenLine[count + 1].getKind() != Token::Kind::REG)
             {
                 throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
             }
         }
 
-        else if (tokenLine[count].getLexeme() == "slt")
+        else if (tokenLine[count].getLexeme() == "beq" || tokenLine[count].getLexeme() == "bne")
         {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 3].getKind() != Token::Kind::REG ||
-                tokenLine[count + 5].getKind() != Token::Kind::REG || (count + 6) != int(tokenLine.size()))
+            if ((count + 6) != int(tokenLine.size()) || (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 2].getKind() != Token::Kind::COMMA ||
+                                                         tokenLine[count + 3].getKind() != Token::Kind::REG || tokenLine[count + 4].getKind() != Token::Kind::COMMA ||
+                                                         (tokenLine[count + 5].getKind() != Token::Kind::INT && tokenLine[count + 5].getKind() != Token::Kind::HEXINT &&
+                                                          tokenLine[count + 5].getKind() != Token::Kind::ID)))
             {
                 throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
             }
         }
 
-        else if (tokenLine[count].getLexeme() == "sltu")
+        else if (tokenLine[count].getLexeme() == "lis" || tokenLine[count].getLexeme() == "mflo" || tokenLine[count].getLexeme() == "mfhi")
         {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 3].getKind() != Token::Kind::REG ||
-                tokenLine[count + 5].getKind() != Token::Kind::REG || (count + 6) != int(tokenLine.size()))
+            if ((count + 2) != int(tokenLine.size()) || tokenLine[count + 1].getKind() != Token::Kind::REG)
             {
                 throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
             }
         }
 
-        else if (tokenLine[count].getLexeme() == "jr")
+        else if (tokenLine[count].getLexeme() == "mult" || tokenLine[count].getLexeme() == "multu" ||
+                 tokenLine[count].getLexeme() == "div" || tokenLine[count].getLexeme() == "divu")
         {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || (count + 2) != int(tokenLine.size()))
+            if ((count + 4) != int(tokenLine.size()) || tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 2].getKind() != Token::Kind::COMMA ||
+                tokenLine[count + 3].getKind() != Token::Kind::REG)
             {
                 throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
+                return;
             }
         }
 
-        else if (tokenLine[count].getLexeme() == "jalr")
+        else if (tokenLine[count].getLexeme() == "sw" || tokenLine[count].getLexeme() == "lw")
         {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || (count + 2) != int(tokenLine.size()))
-            {
-                throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
-            }
-        }
-
-        else if (tokenLine[count].getLexeme() == "beq")
-        {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 3].getKind() != Token::Kind::REG ||
-                (tokenLine[count + 5].getKind() != Token::Kind::INT && tokenLine[count + 5].getKind() != Token::Kind::HEXINT &&
-                 tokenLine[count + 5].getKind() != Token::Kind::ID) ||
-                (count + 6) != int(tokenLine.size()))
-            {
-                throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
-            }
-        }
-
-        else if (tokenLine[count].getLexeme() == "bne")
-        {
-            if (tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 3].getKind() != Token::Kind::REG ||
-                (tokenLine[count + 5].getKind() != Token::Kind::INT && tokenLine[count + 5].getKind() != Token::Kind::HEXINT &&
-                 tokenLine[count + 5].getKind() != Token::Kind::ID) ||
-                (count + 6) != int(tokenLine.size()))
+            if ((count + 7) != int(tokenLine.size()) || tokenLine[count + 1].getKind() != Token::Kind::REG || tokenLine[count + 2].getKind() != Token::Kind::COMMA ||
+                (tokenLine[count + 3].getKind() != Token::Kind::INT && tokenLine[count + 3].getKind() != Token::Kind::HEXINT) || tokenLine[count + 4].getKind() != Token::Kind::LPAREN ||
+                tokenLine[count + 5].getKind() != Token::Kind::REG || tokenLine[count + 6].getKind() != Token::Kind::RPAREN)
             {
                 throw ParsingFailure("ERROR: invalid Instruction / instruction format!");
             }

@@ -1,6 +1,6 @@
 #include "instructions.h"
 
-Instructions::Instructions(std::vector<Token> tokenLine, int PC)
+Instructions::Instructions(std::vector<Token> tokenLine, int PC, SymbolTable table)
 {
     try
     {
@@ -48,14 +48,68 @@ Instructions::Instructions(std::vector<Token> tokenLine, int PC)
 
             else if (tokenLine[0].getLexeme() == "beq")
             {
-                BEQ beq{tokenLine};
+                BEQ beq{tokenLine, PC, table};
                 binaryInstruction = beq.getInstruction();
             }
 
             else if (tokenLine[0].getLexeme() == "bne")
             {
-                BNE bne{tokenLine};
+                BNE bne{tokenLine, PC, table};
                 binaryInstruction = bne.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "lis")
+            {
+                LIS lis{tokenLine};
+                binaryInstruction = lis.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "mflo")
+            {
+                MFLO mflo{tokenLine};
+                binaryInstruction = mflo.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "mfhi")
+            {
+                MFHI mfhi{tokenLine};
+                binaryInstruction = mfhi.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "mult")
+            {
+                MULT mult{tokenLine};
+                binaryInstruction = mult.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "multu")
+            {
+                MULTU multu{tokenLine};
+                binaryInstruction = multu.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "div")
+            {
+                DIV div{tokenLine};
+                binaryInstruction = div.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "divu")
+            {
+                DIVU divu{tokenLine};
+                binaryInstruction = divu.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "sw")
+            {
+                SW sw{tokenLine};
+                binaryInstruction = sw.getInstruction();
+            }
+
+            else if (tokenLine[0].getLexeme() == "lw")
+            {
+                LW lw{tokenLine};
+                binaryInstruction = lw.getInstruction();
             }
         }
     }
@@ -100,6 +154,56 @@ Instructions::Instructions(std::vector<Token> tokenLine, int PC)
     }
 
     catch (const BNEFailure f)
+    {
+        throw f;
+    }
+
+    catch (const LISFailure f)
+    {
+        throw f;
+    }
+
+    catch (const MFLOFailure f)
+    {
+        throw f;
+    }
+
+    catch (const MFHIFailure f)
+    {
+        throw f;
+    }
+
+    catch (const MULTFailure f)
+    {
+        throw f;
+    }
+
+    catch (const MULTUFailure f)
+    {
+        throw f;
+    }
+
+    catch (const DIVFailure f)
+    {
+        throw f;
+    }
+
+    catch (const DIVUFailure f)
+    {
+        throw f;
+    }
+
+    catch (const SWFailure f)
+    {
+        throw f;
+    }
+
+    catch (const LWFailure f)
+    {
+        throw f;
+    }
+
+    catch (const SymbolTableFailure f)
     {
         throw f;
     }

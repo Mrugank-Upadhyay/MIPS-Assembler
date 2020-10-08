@@ -1,6 +1,6 @@
 #include "bne.h"
 
-BNE::BNE(std::vector<Token> tokenLine)
+BNE::BNE(std::vector<Token> tokenLine, int PC, SymbolTable table)
 {
     try
     {
@@ -37,6 +37,12 @@ BNE::BNE(std::vector<Token> tokenLine)
             I = tempInt;
         }
 
+        else
+        {
+            int labelValue = table.find(tokenLine[5].getLexeme());
+            I = (labelValue - PC - 4) / 4;
+        }
+
         if (0 > S || S > 31 || 0 > T || T > 31)
         {
             throw BNEFailure("ERROR: invalid register");
@@ -51,6 +57,11 @@ BNE::BNE(std::vector<Token> tokenLine)
         Instruction = opCode | SInstruction | TInstruction | (I & 0xffff);
     }
     catch (const BNEFailure f)
+    {
+        throw f;
+    }
+
+    catch (const SymbolTableFailure f)
     {
         throw f;
     }

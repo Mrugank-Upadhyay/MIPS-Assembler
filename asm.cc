@@ -47,15 +47,6 @@ int main()
       PC += 4;
       std::vector<Token> tokenLine = scan(line);
 
-      //For reviewing Token Output
-
-      // for (auto token : tokenLine)
-      // {
-      //   std::cout << token;
-      // }
-
-      // std::cout << std::endl;
-
       Parser parser{tokenLine, symbolTable, PC};
 
       if (parser.getSkip() == true)
@@ -106,7 +97,8 @@ int main()
     {
       Instructions instruction{slice(encodedLine.getTokenLine(),
                                      encodedLine.getInstructionStart(), encodedLine.getTokenLine().size() - 1),
-                               encodedLine.getPC()};
+                               encodedLine.getPC(), symbolTable};
+
       unsigned char c = instruction.getInstruction() >> 24;
       std::cout << c;
       c = instruction.getInstruction() >> 16;
@@ -172,7 +164,65 @@ int main()
     return 1;
   }
 
-  // symbolTable.print();
+  catch (const LISFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const MFLOFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const MFHIFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const MULTFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const MULTUFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const DIVFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const DIVUFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const SWFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const LWFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
+
+  catch (const SymbolTableFailure f)
+  {
+    std::cerr << f.what() << std::endl;
+    return 1;
+  }
 
   return 0;
 }

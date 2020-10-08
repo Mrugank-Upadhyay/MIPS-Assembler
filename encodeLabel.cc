@@ -2,6 +2,8 @@
 
 EncodeLabel::EncodeLabel(std::vector<InstructionLine> intstructionList, SymbolTable table)
 {
+    bool keepLabel = false;
+
     for (auto line : intstructionList)
     {
         std::vector<Token> tokenLine = line.getTokenLine();
@@ -17,7 +19,8 @@ EncodeLabel::EncodeLabel(std::vector<InstructionLine> intstructionList, SymbolTa
                  token.getLexeme() != "mfhi" && token.getLexeme() != "sw" &&
                  token.getLexeme() != "lw" && token.getLexeme() != "beq" &&
                  token.getLexeme() != "bne" && token.getLexeme() != "jr" &&
-                 token.getLexeme() != "jalr"))
+                 token.getLexeme() != "jalr") &&
+                (keepLabel == false))
             {
                 int64_t lineNum = table.find(token.getLexeme());
                 newLine.emplace_back(Token::Kind::INT, std::to_string(lineNum));
@@ -25,9 +28,14 @@ EncodeLabel::EncodeLabel(std::vector<InstructionLine> intstructionList, SymbolTa
 
             else
             {
+                if (token.getLexeme() == "beq" || token.getLexeme() == "bne")
+                {
+                    keepLabel = true;
+                }
                 newLine.push_back(token);
             }
         }
+        keepLabel = false;
         encodedList.emplace_back(newLine, line.getInstructionStart(), line.getPC());
     }
 }

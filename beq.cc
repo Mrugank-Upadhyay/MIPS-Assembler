@@ -1,6 +1,6 @@
 #include "beq.h"
 
-BEQ::BEQ(std::vector<Token> tokenLine)
+BEQ::BEQ(std::vector<Token> tokenLine, int PC, SymbolTable table)
 {
     try
     {
@@ -36,6 +36,11 @@ BEQ::BEQ(std::vector<Token> tokenLine)
 
             I = tempInt;
         }
+        else
+        {
+            int labelValue = table.find(tokenLine[5].getLexeme());
+            I = (labelValue - PC - 4) / 4;
+        }
 
         if (0 > S || S > 31 || 0 > T || T > 31)
         {
@@ -51,6 +56,11 @@ BEQ::BEQ(std::vector<Token> tokenLine)
         Instruction = opCode | SInstruction | TInstruction | (I & 0xffff);
     }
     catch (const BEQFailure f)
+    {
+        throw f;
+    }
+
+    catch (const SymbolTableFailure f)
     {
         throw f;
     }

@@ -5,13 +5,14 @@
 #include <string>
 #include <cmath>
 #include "scanner.h"
+#include "symbolTable.h"
 
 class BEQ
 {
     int Instruction;
 
 public:
-    BEQ(std::vector<Token> tokenLine);
+    BEQ(std::vector<Token> tokenLine, int PC, SymbolTable table);
     int getInstruction();
 };
 

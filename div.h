@@ -1,30 +1,28 @@
-#ifndef _BNE_
-#define _BNE_
+#ifndef _DIV_
+#define _DIV_
 
 #include <vector>
 #include <string>
-#include <cmath>
 #include "scanner.h"
-#include "symbolTable.h"
 
-class BNE
+class DIV
 {
     int Instruction;
 
 public:
-    BNE(std::vector<Token> tokenLine, int PC, SymbolTable table);
+    DIV(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class BNEFailure
+class DIVFailure
 {
     std::string message;
 
 public:
-    BNEFailure(std::string message);
+    DIVFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _BNE_ */
+#endif /* _DIV_ */

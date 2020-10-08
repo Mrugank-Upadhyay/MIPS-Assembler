@@ -1,5 +1,5 @@
-#ifndef _BNE_
-#define _BNE_
+#ifndef _SW_
+#define _SW_
 
 #include <vector>
 #include <string>
@@ -7,24 +7,24 @@
 #include "scanner.h"
 #include "symbolTable.h"
 
-class BNE
+class SW
 {
     int Instruction;
 
 public:
-    BNE(std::vector<Token> tokenLine, int PC, SymbolTable table);
+    SW(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class BNEFailure
+class SWFailure
 {
     std::string message;
 
 public:
-    BNEFailure(std::string message);
+    SWFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _BNE_ */
+#endif /* _SW_ */

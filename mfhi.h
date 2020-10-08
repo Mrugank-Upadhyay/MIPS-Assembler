@@ -1,30 +1,28 @@
-#ifndef _BNE_
-#define _BNE_
+#ifndef _MFHI_
+#define _MFHI_
 
 #include <vector>
 #include <string>
-#include <cmath>
 #include "scanner.h"
-#include "symbolTable.h"
 
-class BNE
+class MFHI
 {
     int Instruction;
 
 public:
-    BNE(std::vector<Token> tokenLine, int PC, SymbolTable table);
+    MFHI(std::vector<Token> tokenLine);
     int getInstruction();
 };
 
-class BNEFailure
+class MFHIFailure
 {
     std::string message;
 
 public:
-    BNEFailure(std::string message);
+    MFHIFailure(std::string message);
 
     // Returns the message associated with the exception.
     const std::string &what() const;
 };
 
-#endif /* _BNE_ */
+#endif /* _MFHI_ */
