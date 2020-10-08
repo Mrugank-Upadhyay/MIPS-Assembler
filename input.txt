@@ -1,2 +1,32 @@
-div $0
-divu $0
+Procedure:
+lis $1
+.word -12
+sw $2, -4($30)
+sw $4, -8($30)
+sw $31, -12($30)
+add $30, $30, $1
+
+lis $1
+.word 3
+lis $2
+.word 3
+lis $3
+.word 1
+add $5, $5, $0
+
+loop:
+beq $2 $0 end
+mult $1 $2
+mflo $4
+sub $2, $2, $3
+add $5, $5, $4
+beq $0, $0, loop
+
+end:
+lis $1
+.word 12
+add $30, $30, $1
+lw $2, -4($30)
+lw $4, -8($30)
+lw $31, -12($30)
+jr $31
