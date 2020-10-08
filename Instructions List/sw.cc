@@ -54,11 +54,6 @@ SW::SW(std::vector<Token> tokenLine)
     {
         throw f;
     }
-
-    catch (const SymbolTableFailure f)
-    {
-        throw f;
-    }
 }
 
 int SW::getInstruction()

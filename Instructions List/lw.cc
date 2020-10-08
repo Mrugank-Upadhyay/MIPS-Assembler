@@ -54,11 +54,6 @@ LW::LW(std::vector<Token> tokenLine)
     {
         throw f;
     }
-
-    catch (const SymbolTableFailure f)
-    {
-        throw f;
-    }
 }
 
 int LW::getInstruction()
